@@ -84,3 +84,39 @@ for i in range(total_len):
         #### 시험 전용 데이터
         test_data.append(data)
         test_label.append(label)
+
+
+
+''''''''''''''''''''''''''''''''''''''''''
+# 학습
+''''''''''''''''''''''''''''''''''''''''''
+
+clf = svm.SVC()
+clf.fit(train_data, train_label)
+
+
+''''''''''''''''''''''''''''''''''''''''''
+# 예측
+''''''''''''''''''''''''''''''''''''''''''
+
+pre = clf.predict(test_data)
+
+
+''''''''''''''''''''''''''''''''''''''''''
+# 정답률 구하기
+''''''''''''''''''''''''''''''''''''''''''
+
+## 정답률
+accuracy = metrics.accuracy_score(test_label, pre)
+
+## 오답 데이터 출력
+for i in range(len(pre)):
+    if pre[i] != test_label[i]:
+        print("%d 번째 예측값 = " %i, pre[i] )
+        print("%d번째 실제값 = " %i, test_label[i])
+        print("-------------------------------")
+
+print("정답률 = ", accuracy)
+
+
+''' shuffle 때문에 코드 실행마다 예측값 및 정답률이 변화함 '''
